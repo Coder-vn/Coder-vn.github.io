@@ -5229,6 +5229,12 @@ h6 {
   margin-bottom: 10px;
 }
 
+.introduction{
+  background-color: #ffffff;
+  padding: 1rem;
+  margin: 1rem;
+}
+
 /* line 1, E:/168 Daren Blog/168_Daren_Blog_html/sass/_breadcrumb.scss */
 .breadcrumb {
   background-color: #fff1f1;
