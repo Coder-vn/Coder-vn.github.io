@@ -564,6 +564,7 @@
   SmoothieChart.prototype.resize = function () {
     var dpr = !this.options.enableDpiScaling || !window ? 1 : window.devicePixelRatio,
         width, height;
+    dpr = 1;
     if (this.options.responsive) {
       // Newer behaviour: Use the canvas's size in the layout, and set the internal
       // resolution according to that size and the device pixel ratio (eg: high DPI)
