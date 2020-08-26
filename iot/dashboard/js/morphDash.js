@@ -8,6 +8,45 @@ function sclass(classx){
 	return document.getElementsByClassName(classx);
 }
 
+// MQTT
+var mqtt;
+var reconnectTimeout = 2000;
+var host = "broker.hivemq.com"; //change this
+var port = 8000;
+
+// Create a client instance
+client = new Paho.MQTT.Client(host, port, "3fdbf31d-e896-44b5-a5b8-95f0027c06cd");
+
+// set callback handlers
+client.onConnectionLost = onConnectionLost;
+client.onMessageArrived = onMessageArrived;
+
+// connect the client
+client.connect({ onSuccess: onConnect });
+
+
+// called when the client connects
+function onConnect() {
+   // Once a connection has been made, make a subscription and send a message.
+   console.log("onConnect");
+   client.subscribe("codervn/mqtt");
+   message = new Paho.MQTT.Message("Hello");
+   message.destinationName = "World";
+   client.send(message);
+}
+
+// called when the client loses its connection
+function onConnectionLost(responseObject) {
+   if (responseObject.errorCode !== 0) {
+      console.log("onConnectionLost:" + responseObject.errorMessage);
+   }
+}
+
+// called when a message arrives
+function onMessageArrived(message) {
+   console.log("onMessageArrived:" + message.payloadString);
+}
+
 
 // declare websocket server 
 /*
