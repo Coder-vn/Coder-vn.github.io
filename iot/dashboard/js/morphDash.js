@@ -10,7 +10,7 @@ function sclass(classx){
 
 
 // declare websocket server 
-
+/*
 var socket = io();
 
 
@@ -65,7 +65,7 @@ socket.on("s2",(sensor2)=>{
   }
 
    console.log(sensor2);
-})
+})*/
 
       
 
@@ -233,8 +233,8 @@ function nav(page,btn){
 
 // Add a random value to each line every second
 setInterval(function() {
-  line1.append(new Date().getTime(), parseInt(el('hum').innerHTML));
-  line2.append(new Date().getTime(), parseInt(el('temp').innerHTML));
+  line1.append(new Date().getTime(), Math.random());
+  //line2.append(new Date().getTime(), Math.random());
   //line3.append(new Date().getTime(), parseFloat(el('ssx').innerHTML));
 }, 500);
 
@@ -244,7 +244,7 @@ setInterval(function() {
    function createTimeline() {
       var chart = new SmoothieChart({responsive: true});
       chart.addTimeSeries(line1,{ strokeStyle:'#3F88BF', fillStyle:'rgba(77, 157, 218, 0.68)', lineWidth:2 });
-      chart.addTimeSeries(line2,{ strokeStyle:'#E21C33', fillStyle:'rgba(226, 28, 51, 0.58)', lineWidth:2 });
+      //chart.addTimeSeries(line2,{ strokeStyle:'#E21C33', fillStyle:'rgba(226, 28, 51, 0.58)', lineWidth:2 });
 
       chart.streamTo(document.getElementById("chart"), 500);
    }
