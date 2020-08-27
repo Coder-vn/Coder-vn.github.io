@@ -9,6 +9,7 @@ function sclass(classx){
 }
 
 // MQTT
+/*
 var mqtt;
 var reconnectTimeout = 2000;
 var host = "broker.hivemq.com"; //change this
@@ -46,7 +47,7 @@ function onConnectionLost(responseObject) {
 function onMessageArrived(message) {
    console.log("onMessageArrived:" + message.payloadString);
 }
-
+*/
 
 // declare websocket server 
 /*
