@@ -2082,13 +2082,13 @@ ul {
 
 /* line 7, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
 .main_menu .navbar {
-  padding: 33px 0px;
+  padding: 0px 0px;
 }
 
 @media (max-width: 576px) {
   /* line 7, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
   .main_menu .navbar {
-    padding: 20px 0px;
+    padding: 2px 0px;
   }
 }
 
