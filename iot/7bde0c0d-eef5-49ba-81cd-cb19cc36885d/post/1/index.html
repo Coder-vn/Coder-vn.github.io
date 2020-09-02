@@ -102,7 +102,7 @@
   <!-- Header part end-->
 
   <!-- feature_post start-->
-  <div class="content">
+  <div class="content" id="content">
     <h1 style="margin-top: 1rem; font-weight: bold; color: #00B5AD">Xây dựng Dashboard giám sát nhiệt độ</h1>
     <p>Bài này sẽ hướng dẫn tạo một dashboard cơ bản sử dụng C# MVC, lấy dữ liệu từ mqtt</p>
     <p>Trước tiên sẽ tìm hiểu về cách xây dựng 1 web server sử dụng mô hình MVC</p>
@@ -348,12 +348,10 @@
   <script src="../../../../js/custom.js"></script>
   <script src="../../../../js/prism.js"></script>
   <script>
-    elem = document.querySelector('.content');
-    console.log(elem);
     $(document).ready(function() {
-
-      // Code to be executed
-      console.log("Document is ready");
+      if(window.innerHeight > window.innerWidth){
+        document.getElementById('content').style.width = '90%';
+      }
     });
 
   </script>
