@@ -2330,7 +2330,7 @@ ul {
   color: #000 !important;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 991px) {
   /* line 211, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
   .navbar-light .navbar-toggler {
     border-color: transparent;
@@ -2370,107 +2370,7 @@ ul {
   }
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-  /* line 254, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .navbar-light .navbar-toggler {
-    border-color: transparent;
-    padding: 0px;
-    position: absolute;
-    left: 0;
-  }
-  /* line 261, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .navbar-brand img {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: 0 auto;
-    top: 24px;
-  }
-  /* line 271, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .navbar-collapse {
-    z-index: 9999 !important;
-    position: absolute;
-    left: 0;
-    top: 71px;
-    width: 100%;
-    background-color: #fff;
-    text-align: center !important;
-  }
-  /* line 282, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .main-menu-item {
-    text-align: left !important;
-  }
-  /* line 285, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .main-menu-item .nav-item {
-    padding: 10px 15px !important;
-  }
-  /* line 288, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .main-menu-item .nav-item a {
-    padding: 8px 15px !important;
-  }
-  /* line 294, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .dropdown .dropdown-menu {
-    transform: scale(1, 0);
-    display: none;
-  }
-  /* line 299, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .dropdown:hover .dropdown-menu {
-    transform: scale(1);
-    display: block;
-  }
-}
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* line 308, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .navbar-light .navbar-toggler {
-    border-color: transparent;
-    padding: 0px;
-    position: absolute;
-    left: 0;
-  }
-  /* line 315, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .navbar-brand img {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin: 0 auto;
-    top: 29px;
-  }
-  /* line 325, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .navbar-collapse {
-    z-index: 9999 !important;
-    position: absolute;
-    left: 0;
-    top: 71px;
-    width: 100%;
-    background-color: #fff;
-    text-align: center !important;
-  }
-  /* line 336, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .main-menu-item {
-    text-align: left !important;
-  }
-  /* line 339, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .main-menu-item .nav-item {
-    padding: 10px 15px !important;
-  }
-  /* line 342, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .main_menu .main-menu-item .nav-item a {
-    padding: 8px 15px !important;
-  }
-  /* line 348, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .dropdown .dropdown-menu {
-    transform: scale(1, 0);
-    display: none;
-  }
-  /* line 353, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
-  .dropdown:hover .dropdown-menu {
-    transform: scale(1);
-    display: block;
-  }
-}
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 363, E:/168 Daren Blog/168_Daren_Blog_html/sass/_menu.scss */
