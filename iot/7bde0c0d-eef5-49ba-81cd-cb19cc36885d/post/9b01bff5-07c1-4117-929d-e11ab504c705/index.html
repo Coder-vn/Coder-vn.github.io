@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="../../../../css/search.css">
   <!-- style CSS -->
   <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/prism.css">
+
   <style>
     .banner_iot_bg_1 {
       background-image: url("img/banner_blog/1.jpg");
@@ -129,13 +131,142 @@
     <p>Vào Project->Manager Nuget packages... và tìm gói m2mqtt</p>
     <img src="image/4.PNG" />
     <h2 style="margin-top: 2rem; font-weight: bold;">Import thư viện m2mqtt vào project</h2>
-    <img src="image/5.png" />
+    <pre><code class="lang-csharp">
+      using uPLibrary.Networking.M2Mqtt;
+      using uPLibrary.Networking.M2Mqtt.Messages;
+    </code></pre>
     <h2 style="margin-top: 2rem; font-weight: bold;">Khởi tạo client và chạy thử subscribe</h2>
-    <img src="image/6.png" />
+    <pre><code class="lang-csharp">
+      MqttClient client = new MqttClient("broker.hivemq.com", 1883, false, MqttSslProtocols.None, null, null);
+      client.MqttMsgPublishReceived += clientReceivedData;
+
+      string clientId = Guid.NewGuid().ToString();
+      client.Connect(clientId);
+
+      client.Subscribe(new string[] { "2cfdddc1-651d-4a1b-ac9a-25ae2f016400" }, new byte[] { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE });
+    </code></pre>
     <h2 style="margin-top: 2rem; font-weight: bold;">Add template vào view</h2>
-    <h2 style="margin-top: 2rem; font-weight: bold;">Sử dụng ajax để truyền dữ liệu giữa backend - frontend</h2>    
+    <p>Sử dụng các template dashboard free có sẵn trên mạng, ngoài ra cần sử dụng những template chưa bị tối ưu cũng
+      như chưa bị tối giản trong code javascript để có thể dễ dàng chỉnh sửa
+    </p>
+    <p>Có thể sử dụng template <a href="https://startbootstrap.com/themes/sb-admin-2/">Sb-admin-2</a></p>
+    <p>Sau khi tải template về cần vào thư mục js để kiểm tra code javascript có thể chỉnh sửa được hay 
+      không</p>
+    <p>Hình bên phải mô tả code javascript đã được tối ưu, do ngôn ngữ javascript là ngôn ngữ thông dịch, 
+      nên toàn bộ file javascript sẽ được tải lên máy người dùng và thực thi trên trình duyệt web. Vì thế
+      để web chạy nhanh hơn(load nhanh hơn) thì developer cần phải làm nhẹ nhất các file javascript bằng 
+      cách làm tinh gọn các biến sử dụng chỉ thành các ký tự. Vì vậy khá khó để sửa đổi code để tùy chỉnh
+      dashboard
+    </p>
+    <div class="row" style="margin-left: 20px;">
+      <img style="display: block;" src="image/8.png" />
+      <div style="width: 40px;"></div>
+      <img src="image/9.png" />
+    </div>
+    <h2 style="margin-top: 2rem; font-weight: bold;">Sử dụng ajax để truyền dữ liệu giữa backend - frontend</h2>
+    <p>
+      AJAX là chữ viết tắt của Asynchronous JavaScript and XML. Đơn giản thì ajax giúp cho việc cập nhật 
+      dữ liệu từ server -> trình duyệt người dùng thì không cần phải tải lại trang
+    </p>
+    <img src="image/10.jpg" />
+    <h4>Gửi ajax đến server</h4>
+    <p>Trong đó</p>
+    <ul style="list-style-type: circle; margin-left: 2rem;">
+      <li>url: là đường dẫn đến 1 hàm requestData trong HomeController</li>
+      <li>type: có 2 loại GET và POST, GET dùng để lấy dữ liệu hoặc POST dùng để gửi dữ liệu lên server</li>
+      <li>data: dữ liệu gửi lên server(chỉ có đối với POST)</li>
+      <li>success-error: là 2 hàm callback nhưng chỉ duy nhất 1 hàm được thực hiện, được gọi khi nhận 
+        trả về từ server(sẽ gọi callback success) hoặc lỗi/timeout(sẽ gọi callback error). Ở hàm callback
+        có thể gán một function đã tạo(như error) hoặc có thể gán một function mới(như success)
+      </li>
+    </ul>    
+    <pre><code class="lang-javascript">
+      $.ajax({
+        url: "/Home/requestData",
+        type: "POST",
+        data: JSON.stringify(objTest),
+        success: function (result) {
+          
+        },
+        error: errorProcess(errorResult)
+    });
+    </code></pre>
+    <h4>Server tiếp nhận gói tin ajax và phản hồi</h4>
+    <p>Trong HomeController tạo function tương ứng với url đã tạo trong ajax, dữ liệu truyền vào
+      là dữ liệu từ frontend gửi đến controller.</p>
+    <p>Cuối cùng sau khi xử lý dữ liệu sẽ return dữ liệu về phía frontend
+    </p>
+    <pre><code class="lang-javascript">
+      public JsonResult requestData(String temp)
+      {
+        String result = "{\"Value\": \"" + sensorValueStr + "\"}";
+        return Json(result, JsonRequestBehavior.AllowGet);
+      }
+    </code></pre>
     <h2 style="margin-top: 2rem; font-weight: bold;">Cập nhật chart</h2>
-    <h2 style="margin-top: 2rem; font-weight: bold;">Publish web server</h2>
+    <img src="image/7.png" />
+    <p>Thư viện chart sử dụng canvas để render nên khi thay đổi nội dung trên chart cần phải 
+      vẽ lại hết toàn bộ</p>
+    <p>Ở backend sẽ gửi result là chuỗi json kèm key là "Value" để chứa giá trị hiện tại cần
+      cập nhật lên chart, vì thế bước đầu tiên sẽ chuyển json -> key-value và đẩy dữ liệu đó
+      vào mảng dữ liệu dataChart
+    </p>
+    <p>Tùy theo chart có cần lưu giá trị cũ hay chỉ cần chạy real-time thì ta có thể giới hạn
+      số lượng trên mảng dữ liệu
+    </p>
+    <p>Ngoài ra các thư viện chart thông dụng thường hay kèm các hiệu ứng khi render chỉ phù hợp với các
+      chart cố định, không thay đổi dữ liệu. Vì thế cần phải disable animation trong chart đi
+    </p>
+    <pre><code class="lang-javascript">
+      $.ajax({
+        url: "/Home/requestData",
+        type: "POST",
+        data: JSON.stringify(objTest),
+        success: function (result) {
+            valueJson = JSON.parse(result);
+            value = parseInt(valueJson['Value']);
+            dataChart.push(value);
+
+            if (dataChart.length > 20) {
+                dataChart.shift();
+            }
+
+            var ctx = document.getElementById('my-chart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                animation: false,
+                data: {                          
+                    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                    datasets: [{
+                        label: 'apples',
+                        data: dataChart,
+                        backgroundColor: "rgba(153,255,51,0.6)"
+                    }]
+                },
+                options: {
+                    animation: {
+                        duration: 0
+                    }
+                }
+            });
+            
+        },
+        error: function (result) {
+            console.log(result);
+        }
+      });
+    </code></pre>
+    <h2 style="margin-top: 2rem; font-weight: bold;">Đưa dự án lên web server</h2>
+    <a href="https://codervn.xyz/iot/dashboard/">Dashboard</a>
+    <h4 style="margin-top: 20px;">Publish project c#</h4>
+    <p>Chọn vào publish project cần đưa lên server, sau đó nén toàn bộ file thành định dạng .zip</p>
+    <img src="image/11.png" />
+    <h4 style="margin-top: 20px;">Đưa file publish lên server</h4>
+    <p>Vào bảng điều khiển của hosting(nếu lập trình .net thì cần sử dụng hosting window), vào Files
+      và trong mục Home directory chọn vào httpdocs. Upload file zip đã nén ở trên lên và giải nén ra
+      và hoàn tất việc đưa project lên web server
+    </p>
+    <img src="image/12.png" />
   </div>
   <div style="height: 3rem;"></div>
   <!-- feature_post end-->
@@ -213,6 +344,7 @@
   <script src="../../../../js/bootstrap.min.js"></script>
   <!-- custom js -->
   <script src="../../../../js/custom.js"></script>
+  <script src="../../../../js/prism.js"></script>
 </body>
 
 </html>

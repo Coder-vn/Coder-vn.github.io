@@ -3696,13 +3696,13 @@ ul {
 /* line 2, E:/168 Daren Blog/168_Daren_Blog_html/sass/_footer.scss */
 .footer-area {
   background-color: #111516;
-  padding: 100px 0px 30px;
+  padding: 10px 0px 30px;
 }
 
 @media (max-width: 991px) {
   /* line 2, E:/168 Daren Blog/168_Daren_Blog_html/sass/_footer.scss */
   .footer-area {
-    padding: 70px 0px 30px;
+    padding: 7px 0px 30px;
   }
 }
 
@@ -5284,13 +5284,13 @@ h6 {
 /* line 2, E:/168 Daren Blog/168_Daren_Blog_html/sass/_footer.scss */
 .footer-area {
   background-color: #111516;
-  padding: 100px 0px 30px;
+  padding: 15px 0px 10px;
 }
 
 @media (max-width: 991px) {
   /* line 2, E:/168 Daren Blog/168_Daren_Blog_html/sass/_footer.scss */
   .footer-area {
-    padding: 70px 0px 30px;
+    padding: 15px 0px 10px;
   }
 }
 
@@ -5477,8 +5477,8 @@ h6 {
 /* line 138, E:/168 Daren Blog/168_Daren_Blog_html/sass/_footer.scss */
 .footer-area .copyright_part_text {
   border-top: 1px solid #41404f;
-  padding-top: 30px;
-  margin-top: 83px;
+  padding-top: 3px;
+  margin-top: 1px;
 }
 
 /* line 142, E:/168 Daren Blog/168_Daren_Blog_html/sass/_footer.scss */
