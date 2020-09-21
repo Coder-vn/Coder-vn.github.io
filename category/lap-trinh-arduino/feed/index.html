@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Lập trình arduino &#8211; CoderVN</title>
+	<atom:link href="http://localhost/category/lap-trinh-arduino/feed/" rel="self" type="application/rss+xml" />
+	<link>http://localhost</link>
+	<description>Hành trình trở thành FULL STACK DEVELOPER</description>
+	<lastBuildDate>Mon, 21 Sep 2020 14:31:41 +0000</lastBuildDate>
+	<language>vi</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.1</generator>
+	<item>
+		<title>IOT-ESP8266: 01-Tìm hiểu module esp8266 và khởi tạo công cụ</title>
+		<link>http://localhost/2020/09/21/iot-esp8266-01/</link>
+					<comments>http://localhost/2020/09/21/iot-esp8266-01/#respond</comments>
+		
+		<dc:creator><![CDATA[codervn]]></dc:creator>
+		<pubDate>Mon, 21 Sep 2020 04:12:15 +0000</pubDate>
+				<category><![CDATA[Lập trình arduino]]></category>
+		<guid isPermaLink="false">http://localhost/?p=40</guid>
+
+					<description><![CDATA[Kit ESP8266 là kit phát triển dựa trên nền Wifi SoC với thiết kế dễ dàng sử dụng vì tích hợp sẵn mạch nạp sử [&#8230;] <span class="read-more-link"><a class="read-more" href="http://localhost/2020/09/21/iot-esp8266-01/">Xem thêm</a></span>]]></description>
+										<content:encoded><![CDATA[
+<p>Kit ESP8266 là kit phát triển dựa trên nền Wifi SoC với thiết kế dễ dàng sử dụng vì tích hợp sẵn mạch nạp sử dụng ic CP2102 trên borad. Bên trong ESP8266 có sẵn một lõi vi xử lý vì thế bạn có thể trực tiếp lập trình cho ESP8266 mà không cần thêm bất kì con vi xử lý nào nữa. Hiện tại có hai ngôn ngữ có thể lập trình cho ESP8266, sử dụng trực tiếp phần mềm IDE của Arduino để lập trình với bộ thư viện riêng hoặc sử dụng phần mềm NodeMCU</p>
+
+
+
+<p>Với kích thước nhỏ gọn, linh hoạt nên board dễ dàng liên kết với các thiết bị ngoại vi để tạo thành project, sản phẩm mẫu một cách nhanh chóng.</p>
+
+
+
+<p><strong>Thông số kỹ thuật</strong></p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td>Chip điều khiển</td><td>ESP8266EX</td></tr><tr><td>WiFi</td><td>2.4 GHz hỗ trợ chuẩn 802.11 b/g/n</td></tr><tr><td>Điện áp hoạt động</td><td>3.3 V</td></tr><tr><td>Điện áp đầu vào</td><td>5V (thông qua cổng USB)</td></tr><tr><td>Số chân I/O</td><td>11 (tất cả các chân I/O đều có Interrupt/PWM/I2C/One-wire, trừ chân D0)</td></tr><tr><td>Số chân Analog Input</td><td>1 (điện áp vào tối đa 3.3V)</td></tr><tr><td>Bộ nhớ Flash</td><td>4MB</td></tr><tr><td>Hỗ trợ bảo mật</td><td>WPA/WPA2</td></tr><tr><td>Tích hợp giao thức</td><td>TCP/IP</td></tr><tr><td>Lập trình trên các ngôn ngữ</td><td>C/C++, Micropython, NodeMCU &#8211; Lua</td></tr></tbody></table></figure>
+
+
+
+<p><strong>Sơ đồ chân</strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="666" height="364" src="http://localhost/wp-content/uploads/2020/09/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.jpg" alt="" class="wp-image-133"/></figure>
+
+
+
+<p><strong>Công cụ phát triển</strong></p>
+
+
+
+<ul><li>Tải và cài đặt Arduino, trình biên dịch và nạp code cho nodemcu</li><li>Cài đặt gói esp8266 cho Arduino<br>Mở Arduino lên và vào File -&gt; Preferences và dán chuỗi này vào: <a href="http://arduino.esp8266.com/stable/package_esp8266com_index.json">http://arduino.esp8266.com/stable/package_esp8266com_index.json</a> -&gt; Nhấn OK</li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="723" height="606" src="http://localhost/wp-content/uploads/2020/09/2019-04-28-17_18_59-.png" alt="" class="wp-image-135"/></figure>
+
+
+
+<ul><li>Sau đó vào <em>Tools -&gt; Board (…) -&gt; Boards Manage</em>r và gõ esp8266 và nhấn Install để cài gói<br></li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="700" height="608" src="http://localhost/wp-content/uploads/2020/09/1_vUaLD5aSm2iGZ_12tBrXow-1.png" alt="" class="wp-image-139"/></figure>
+
+
+
+<ul><li>Cuối cùng vào <em>Tools -&gt; Board (…)&nbsp;</em>và chọn <em>“NodeMCU 1.0 (ESP 12-E module)”</em> để chọn đúng board để lập trình</li></ul>
+
+
+
+<p>Như vậy chúng ta đã setup xong gói esp8266 trên arduino, bài sau chúng ta sẽ tìm hiểu viết 1 chương trình cơ bản <img src="https://s.w.org/images/core/emoji/13.0.0/72x72/1f600.png" alt="😀" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://localhost/2020/09/21/iot-esp8266-01/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
