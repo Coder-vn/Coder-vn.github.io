@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>lập trình esp8266 &#8211; CoderVN</title>
+	<atom:link href="http://localhost/tag/lap-trinh-esp8266/feed/" rel="self" type="application/rss+xml" />
+	<link>http://localhost</link>
+	<description>Hành trình trở thành FULL STACK DEVELOPER</description>
+	<lastBuildDate>Wed, 23 Sep 2020 17:29:51 +0000</lastBuildDate>
+	<language>vi</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.1</generator>
+	<item>
+		<title>IOT-ESP8266: 05-Ngắt và timer</title>
+		<link>http://localhost/2020/09/23/iot-esp8266-05-ngat-va-timer/</link>
+		
+		<dc:creator><![CDATA[codervn]]></dc:creator>
+		<pubDate>Wed, 23 Sep 2020 17:16:54 +0000</pubDate>
+				<category><![CDATA[Lập trình arduino]]></category>
+		<category><![CDATA[lap trinh arduino]]></category>
+		<category><![CDATA[lập trình arduino]]></category>
+		<category><![CDATA[lập trình esp8266]]></category>
+		<category><![CDATA[lap trinh esp8266]]></category>
+		<category><![CDATA[lap trinh nodemcu]]></category>
+		<category><![CDATA[lập trình nodemcu]]></category>
+		<category><![CDATA[tim hieu arduino]]></category>
+		<category><![CDATA[tìm hiểu arduino]]></category>
+		<category><![CDATA[tìm hiểu esp8266]]></category>
+		<category><![CDATA[tim hieu esp8266]]></category>
+		<category><![CDATA[tim hieu node mcu]]></category>
+		<guid isPermaLink="false">http://localhost/?p=184</guid>
+
+					<description><![CDATA[Các chương trình trước chúng ta đều viết theo dạng tuần tự, nghĩa là các câu lệnh sẽ chạy lần lượt trong hàm loop, sau [&#8230;] <span class="read-more-link"><a class="read-more" href="http://localhost/2020/09/23/iot-esp8266-05-ngat-va-timer/">Xem thêm</a></span>]]></description>
+										<content:encoded><![CDATA[
+<p>Các chương trình trước chúng ta đều viết theo dạng tuần tự, nghĩa là các câu lệnh sẽ chạy lần lượt trong hàm loop, sau đó sẽ chạy lại từ đầu. Nhưng trong các chương trình phức tạp và đòi hỏi thời gian đáp ứng thật nhanh(như nhấn nút để điều khiển gì đó) mà trong chương trình chính trong hàm loop thì quá dài, nếu chúng ta vẫn sử dụng phương pháp đọc input trong hàm loop thì bị trễ. </p>
+
+
+
+<p>Với ngắt, bạn không cần phải liên tục kiểm tra giá trị pin hiện tại. Khi một thay đổi được phát hiện, một sự kiện sẽ được kích hoạt &#8211; một hàm được gọi. Chức năng này được gọi là thường trình dịch vụ ngắt (ISR).</p>
+
+
+
+<p>Do đó để khắc phục được việc đó chúng ta sử dụng ngắt(interrupt), có rất nhiều dạng ngắt khác nhau như: ngắt external(chân input), ngắt nhận dữ liệu uart, ngắt timer,&#8230;</p>
+
+
+
+<p><strong>Cơ chế hoạt động của ngắt </strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="992" height="291" src="http://localhost/wp-content/uploads/2020/09/interrupt.png" alt="" class="wp-image-185"/></figure>
+
+
+
+<p>main program đại diện cho hàm loop, nếu ngắt chưa xảy ra thì main program cứ thế mà chạy, đến khi có sự kiện ngắt thì chip sẽ dừng xử lý trong chương trình main và sẽ chuyển đến chương trình ngắt để xử lý. Sau khi thực hiện xong trong chương trình ngắt, chip sẽ quay về thực hiện tiếp tục vị trí chương trình trước đó trong hàm main.</p>
+
+
+
+<p>Bên dưới sẽ mô tả kỹ hơn về quá trình thực hiện chương trình ngắt:</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="620" height="295" src="http://localhost/wp-content/uploads/2020/09/fig2-interrupt-processing-flow-en.jpg" alt="" class="wp-image-187"/></figure>
+
+
+
+<p><strong>Sử dụng ngắt ngoài(từ chân input) trên arduino</strong></p>
+
+
+
+<p>Để cài đặt 1 ngắt trong Arduino thì chúng ta sử dụng hàm attachInterrupt()</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">attachInterrupt(digitalPinToInterrupt(GPIO), ISR, mode);</pre>
+
+
+
+<p>Trong đó </p>
+
+
+
+<ul><li>digitalPinToInterrupt(GPIO): gán chân IO dạng digital vào chân ngắt, với GPIO là các chân IO trên nodemcu</li><li>ISR: là tên của hàm được gọi khi có ngắt xảy ra</li><li>mode: là các chế độ để kích hoạt ngắt, chúng ta có 3 chế độ: <strong>CHANGE</strong>G-khi có sự thay đổi của chân input, <strong>FALLING</strong>-khi chân input thay đổi trạng thái từ cao -> thấp và cuối cùng <strong>RISING</strong>-khi chân input thay đổi trạng thái từ thấp -> cao</li></ul>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>IOT-ESP8266: 04-Đọc tín hiệu biến trở</title>
+		<link>http://localhost/2020/09/22/iot-esp8266-04-doc-tin-hieu-bien-tro/</link>
+		
+		<dc:creator><![CDATA[codervn]]></dc:creator>
+		<pubDate>Tue, 22 Sep 2020 17:32:43 +0000</pubDate>
+				<category><![CDATA[Lập trình arduino]]></category>
+		<category><![CDATA[arduino]]></category>
+		<category><![CDATA[esp8266]]></category>
+		<category><![CDATA[hệ thống iot]]></category>
+		<category><![CDATA[he thong iot]]></category>
+		<category><![CDATA[iot]]></category>
+		<category><![CDATA[lap trinh arduino]]></category>
+		<category><![CDATA[lập trình arduino]]></category>
+		<category><![CDATA[lập trình esp8266]]></category>
+		<category><![CDATA[lap trinh esp8266]]></category>
+		<category><![CDATA[lap trinh iot]]></category>
+		<category><![CDATA[lập trình iot]]></category>
+		<guid isPermaLink="false">http://localhost/?p=171</guid>
+
+					<description><![CDATA[Trên kit nodemcu có sẵn 1 chân ADC &#8211; Analog to digital conventer, giúp cho chúng ta dễ dàng đọc các tín hiệu analog từ [&#8230;] <span class="read-more-link"><a class="read-more" href="http://localhost/2020/09/22/iot-esp8266-04-doc-tin-hieu-bien-tro/">Xem thêm</a></span>]]></description>
+										<content:encoded><![CDATA[
+<p>Trên kit nodemcu có sẵn 1 chân ADC &#8211; Analog to digital conventer, giúp cho chúng ta dễ dàng đọc các tín hiệu analog từ cảm biến, thiết bị,&#8230; </p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="576" src="http://localhost/wp-content/uploads/2020/09/ESP8266-analog-reading-read-ADC-A0-Arduino-IDE-MicroPython-Lua.jpg" alt="" class="wp-image-172"/></figure>
+
+
+
+<p>Trên kit node mcu thì điện áp đầu vào sẽ từ 0-&gt;3.3V, tuy nhiên nếu chỉ sử dụng chip esp8266 thì điện áp chỉ từ 0-&gt;1V. Ngoài ra bộ ADC tích hợp có độ phân giải là 10bit nên ta sẽ đọc được giá trị từ 0-&gt;1023(tương ứng 0 -&gt; 0V và 1023 -&gt; 3.3V)</p>
+
+
+
+<p><strong>Kết nối phần cứng</strong></p>
+
+
+
+<p>Nếu sử dụng các kit có sẵn như nodemcu,&#8230; thì chúng ta có thể kết nối trực tiếp điện áp phân cực trên biến trở/chiết áp vào thẳng chân A0</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="458" src="http://localhost/wp-content/uploads/2020/09/analog_input_pot_esp8266_bb.png" alt="" class="wp-image-175"/></figure>
+
+
+
+<p>Nếu sử dụng trực tiếp chip esp8266 thì cần phải nối qua cầu phân áp trước khi đưa vào chip</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="735" height="622" src="http://localhost/wp-content/uploads/2020/09/ESP8266-ADC-or-A0_bb.png" alt="" class="wp-image-176"/></figure>
+
+
+
+<p>Chúng ta sử dụng 2 điện trở 220 ôm và 100 ôm, khi đó ta sử dụng công thức bên dưới để tính được chính xác điện áp đặt vào</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="349" height="97" src="http://localhost/wp-content/uploads/2020/09/voltage-divider-equation.png" alt="" class="wp-image-177"/></figure>
+
+
+
+<p><strong>Code tham khảo</strong></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">const int analogInPin = A0;  // ESP8266 Analog Pin ADC0 = A0
+
+int sensorValue = 0;  // value read from the pot
+int outputValue = 0;  // value to output to a PWM pin
+
+void setup() {
+  // initialize serial communication at 115200
+  Serial.begin(115200);
+}
+
+void loop() {
+  // read the analog in value
+  sensorValue = analogRead(analogInPin);
+  
+  // map it to the range of the PWM out
+  outputValue = map(sensorValue, 0, 1023, 0, 255);
+  
+  // print the readings in the Serial Monitor
+  Serial.print("sensor = ");
+  Serial.print(sensorValue);
+  Serial.print("\t output = ");
+  Serial.println(outputValue);
+
+  delay(1000);
+}</pre>
+
+
+
+<p><strong>Kết quả <img src="https://s.w.org/images/core/emoji/13.0.0/72x72/1f600.png" alt="😀" class="wp-smiley" style="height: 1em; max-height: 1em;" /></strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="744" height="541" src="http://localhost/wp-content/uploads/2020/09/ESP8266-Analog-Read-ADC-A0-Arduino-IDE-Serial-Monitor-Readingsf.png" alt="" class="wp-image-178"/></figure>
+
+
+
+<p>Các bạn có thắc mắc liên hệ trực tiếp fanpage trên facebook nhé</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>IOT-ESP8266: 02-Chương trình nháy led</title>
+		<link>http://localhost/2020/09/21/iot-esp8266-02-chuong-trinh-nhay-led/</link>
+		
+		<dc:creator><![CDATA[codervn]]></dc:creator>
+		<pubDate>Mon, 21 Sep 2020 14:48:05 +0000</pubDate>
+				<category><![CDATA[Lập trình arduino]]></category>
+		<category><![CDATA[hệ thống iot]]></category>
+		<category><![CDATA[he thong iot]]></category>
+		<category><![CDATA[lap trinh arduino]]></category>
+		<category><![CDATA[lập trình arduino]]></category>
+		<category><![CDATA[lập trình esp8266]]></category>
+		<category><![CDATA[lap trinh esp8266]]></category>
+		<category><![CDATA[lap trinh iot]]></category>
+		<category><![CDATA[lập trình node mcu]]></category>
+		<category><![CDATA[lap trinh nodemcu]]></category>
+		<category><![CDATA[lập trình nodemcu]]></category>
+		<category><![CDATA[tìm hiểu esp8266]]></category>
+		<category><![CDATA[tim hieu esp8266]]></category>
+		<category><![CDATA[tìm hiểu nodemcu]]></category>
+		<guid isPermaLink="false">http://localhost/?p=144</guid>
+
+					<description><![CDATA[Tìm hiểu phần cứng Trong Arduino sẽ định danh các ngõ vào-ra(dạng 0-mức cao/1-mức thấp) thành ký hiệu Dx với x là số thứ tự [&#8230;] <span class="read-more-link"><a class="read-more" href="http://localhost/2020/09/21/iot-esp8266-02-chuong-trinh-nhay-led/">Xem thêm</a></span>]]></description>
+										<content:encoded><![CDATA[
+<p><strong>Tìm hiểu phần cứng</strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="666" height="364" src="http://localhost/wp-content/uploads/2020/09/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.jpg" alt="" class="wp-image-133"/></figure>
+
+
+
+<p>Trong Arduino sẽ định danh các ngõ vào-ra(dạng 0-mức cao/1-mức thấp) thành ký hiệu Dx với x là số thứ tự bắt đầu từ 0 được in trực tiếp trên bo, mỗi chân Dx đều có thể cấu hình là input hoặc là output bên trong code. Ngoài các chân digital ta có thêm chân A0-ADC0 dùng để đọc mức analog(điện áp).</p>
+
+
+
+<p><strong>Kết nối phần cứng</strong><br></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="666" height="641" src="http://localhost/wp-content/uploads/2020/09/esp8266_led_blinker.png" alt="" class="wp-image-147"/></figure>
+
+
+
+<p>Do trên bo đã tích hợp sẵn IC CP2102 để nạp chương trình và đã cấp nguồn thông qua cổng USB vì thế ta chỉ cần gắn led và trở vào. Ở đây ta gắn chân D8 nối vào chân Anode(chân dương) của led, chân Cathode(chân âm) của led nối vào GND</p>
+
+
+
+<p><strong>Cấu trúc chương trình trong Arduino</strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="490" height="326" src="http://localhost/wp-content/uploads/2020/09/1_oKMRi3xcs5jszcVekHgp4A.png" alt="" class="wp-image-150"/></figure>
+
+
+
+<p>Mỗi chương trình arduino có hai hàm bắt buộc: setup () và loop (). Mã bên trong hàm setup () được thực thi một lần và hàm này để thiết lập môi trường chương trình Arduino của bạn ngay từ đầu. Hàm loop () được chạy liên tục trong khi chip được cấp nguồn và đã thực thi hàm setup () khởi tạo. Ngoài ra có thêm các chương trình xử lý ngắt sẽ thực thi khi có sự kiện mà đã cấu hình cho phép ngắt</p>
+
+
+
+<p>Các lệnh thường gặp trong hàm setup()</p>
+
+
+
+<ul><li>#define LED D8: Thường để chương trình đọc dễ hiểu hơn thì chúng ta sẽ mặc định các ký tự dễ phân biệt(như LED, BUTTON) vào các chân IO</li><li>const int LED = 8: Cách này cũng gần tương tự như dùng #define nhưng cách này sẽ liên quan đến kiểu dữ liệu(int) mà ta chọn. Biến khi tạo ra sẽ không thể thay đổi được giá trị do ta đã định nghĩa là kiểu hằng số</li><li>pinMode(pin, mode): Định nghĩa 1 chân IO nào đó là output hoặc input, với pin là các chân IO(từ D0-&gt;Dx&#8230;)</li></ul>
+
+
+
+<p><strong>Chương trình nháy led cơ bản</strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="774" height="519" src="http://localhost/wp-content/uploads/2020/09/2019-04-28-18_52_34-example_LED-_-Arduino-1.8.9.png" alt="" class="wp-image-153"/></figure>
+
+
+
+<p>Có thể vào File-&gt;Example để lấy project mẫu Blink hoặc có thể tự gõ code để nhớ hơn ^^ Sau đó nạp xuống dưới bo</p>
+
+
+
+<p>Lưu ý vào Tools -&gt; Chọn port đúng với port đăng gắn nodemcu</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="778" height="519" src="http://localhost/wp-content/uploads/2020/09/2019-04-28-18_46_03-example_LED-_-Arduino-1.8.9.png" alt="" class="wp-image-149"/></figure>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>IOT-ESP8266: 01-Tìm hiểu module esp8266 và khởi tạo công cụ</title>
+		<link>http://localhost/2020/09/21/iot-esp8266-01/</link>
+		
+		<dc:creator><![CDATA[codervn]]></dc:creator>
+		<pubDate>Mon, 21 Sep 2020 04:12:15 +0000</pubDate>
+				<category><![CDATA[Lập trình arduino]]></category>
+		<category><![CDATA[lap trinh arduino]]></category>
+		<category><![CDATA[lập trình esp8266]]></category>
+		<category><![CDATA[lap trinh esp8266]]></category>
+		<category><![CDATA[lap trinh iot]]></category>
+		<category><![CDATA[lập trình iot]]></category>
+		<category><![CDATA[lap trinh node mcu]]></category>
+		<category><![CDATA[lập trình node mcu]]></category>
+		<category><![CDATA[tìm hiểu esp8266]]></category>
+		<category><![CDATA[tìm hiểu nodemcu]]></category>
+		<guid isPermaLink="false">http://localhost/?p=40</guid>
+
+					<description><![CDATA[Kit ESP8266 là kit phát triển dựa trên nền Wifi SoC với thiết kế dễ dàng sử dụng vì tích hợp sẵn mạch nạp sử [&#8230;] <span class="read-more-link"><a class="read-more" href="http://localhost/2020/09/21/iot-esp8266-01/">Xem thêm</a></span>]]></description>
+										<content:encoded><![CDATA[
+<p>Kit ESP8266 là kit phát triển dựa trên nền Wifi SoC với thiết kế dễ dàng sử dụng vì tích hợp sẵn mạch nạp sử dụng ic CP2102 trên borad. Bên trong ESP8266 có sẵn một lõi vi xử lý vì thế bạn có thể trực tiếp lập trình cho ESP8266 mà không cần thêm bất kì con vi xử lý nào nữa. Hiện tại có hai ngôn ngữ có thể lập trình cho ESP8266, sử dụng trực tiếp phần mềm IDE của Arduino để lập trình với bộ thư viện riêng hoặc sử dụng phần mềm NodeMCU</p>
+
+
+
+<p>Với kích thước nhỏ gọn, linh hoạt nên board dễ dàng liên kết với các thiết bị ngoại vi để tạo thành project, sản phẩm mẫu một cách nhanh chóng.</p>
+
+
+
+<p><strong>Thông số kỹ thuật</strong></p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td>Chip điều khiển</td><td>ESP8266EX</td></tr><tr><td>WiFi</td><td>2.4 GHz hỗ trợ chuẩn 802.11 b/g/n</td></tr><tr><td>Điện áp hoạt động</td><td>3.3 V</td></tr><tr><td>Điện áp đầu vào</td><td>5V (thông qua cổng USB)</td></tr><tr><td>Số chân I/O</td><td>11 (tất cả các chân I/O đều có Interrupt/PWM/I2C/One-wire, trừ chân D0)</td></tr><tr><td>Số chân Analog Input</td><td>1 (điện áp vào tối đa 3.3V)</td></tr><tr><td>Bộ nhớ Flash</td><td>4MB</td></tr><tr><td>Hỗ trợ bảo mật</td><td>WPA/WPA2</td></tr><tr><td>Tích hợp giao thức</td><td>TCP/IP</td></tr><tr><td>Lập trình trên các ngôn ngữ</td><td>C/C++, Micropython, NodeMCU &#8211; Lua</td></tr></tbody></table></figure>
+
+
+
+<p><strong>Sơ đồ chân</strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="666" height="364" src="http://localhost/wp-content/uploads/2020/09/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.jpg" alt="" class="wp-image-133"/></figure>
+
+
+
+<p><strong>Công cụ phát triển</strong></p>
+
+
+
+<ul><li>Tải và cài đặt Arduino, trình biên dịch và nạp code cho nodemcu</li><li>Cài đặt gói esp8266 cho Arduino<br>Mở Arduino lên và vào File -&gt; Preferences và dán chuỗi này vào: <a href="http://arduino.esp8266.com/stable/package_esp8266com_index.json">http://arduino.esp8266.com/stable/package_esp8266com_index.json</a> -&gt; Nhấn OK</li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="723" height="606" src="http://localhost/wp-content/uploads/2020/09/2019-04-28-17_18_59-.png" alt="" class="wp-image-135"/></figure>
+
+
+
+<ul><li>Sau đó vào <em>Tools -&gt; Board (…) -&gt; Boards Manage</em>r và gõ esp8266 và nhấn Install để cài gói<br></li></ul>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="700" height="608" src="http://localhost/wp-content/uploads/2020/09/1_vUaLD5aSm2iGZ_12tBrXow-1.png" alt="" class="wp-image-139"/></figure>
+
+
+
+<ul><li>Cuối cùng vào <em>Tools -&gt; Board (…)&nbsp;</em>và chọn <em>“NodeMCU 1.0 (ESP 12-E module)”</em> để chọn đúng board để lập trình</li></ul>
+
+
+
+<p>Như vậy chúng ta đã setup xong gói esp8266 trên arduino, bài sau chúng ta sẽ tìm hiểu viết 1 chương trình cơ bản <img src="https://s.w.org/images/core/emoji/13.0.0/72x72/1f600.png" alt="😀" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

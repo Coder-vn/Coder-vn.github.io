@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
 
-<!-- Mirrored from localhost/2020/09/21/iot-esp8266-02-chuong-trinh-nhay-led/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Sep 2020 16:41:44 GMT -->
+<!-- Mirrored from localhost/2020/09/21/iot-esp8266-02-chuong-trinh-nhay-led/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 23 Sep 2020 17:34:57 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-		<link rel="pingback" href="../../../../xmlrpc.php">
 		<title>IOT-ESP8266: 02-Chương trình nháy led &#8211; CoderVN</title>
 <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
 <link rel='dns-prefetch' href='http://s.w.org/' />
 <link rel="alternate" type="application/rss+xml" title="Dòng thông tin CoderVN &raquo;" href="../../../../feed/index.html" />
-<link rel="alternate" type="application/rss+xml" title="Dòng phản hồi CoderVN &raquo;" href="../../../../comments/feed/index.html" />
-<link rel="alternate" type="application/rss+xml" title="CoderVN &raquo; IOT-ESP8266: 02-Chương trình nháy led Dòng phản hồi" href="feed/index.html" />
 		<script type="text/javascript">
 			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/localhost\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.1"}};
 			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
@@ -49,10 +46,12 @@ img.emoji {
 		background-color: #000;
 		}.header-image:before {opacity: 0.40;}
 </style>
+<link rel='stylesheet' id='enlighterjs-css'  href='../../../../wp-content/plugins/enlighter/cache/enlighterjs.min5b97.css?ver=0A0B0C' type='text/css' media='all' />
 <script type='text/javascript' src='../../../../wp-includes/js/jquery/jquery4a5f.js?ver=1.12.4-wp' id='jquery-core-js'></script>
 <link rel="https://api.w.org/" href="../../../../wp-json/index.html" /><link rel="alternate" type="application/json" href="../../../../wp-json/wp/v2/posts/144.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc0db0.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../../wp-includes/wlwmanifest.xml" /> 
 <link rel='prev' title='IOT-ESP8266: 01-Tìm hiểu module esp8266 và khởi tạo công cụ' href='../iot-esp8266-01/index.html' />
+<link rel='next' title='IOT-ESP8266: 03-Điều khiển độ sáng/mờ led với PWM' href='../../22/iot-esp8266-03-dieu-khien-do-sang-mo-led-voi-pwm/index.html' />
 <meta name="generator" content="WordPress 5.5.1" />
 <link rel="canonical" href="index.html" />
 <link rel='shortlink' href='../../../../index421d.html?p=144' />
@@ -137,10 +136,10 @@ img.emoji {
 			<div class="featured-image">
 			<div class="entry-header">
 				<div class="entry-meta entry-category">
-					<span class="cat-links"><a href="../../../../category/khong-phan-loai/index.html" rel="category tag">Chưa được phân loại</a></span>
+					<span class="cat-links"><a href="../../../../category/lap-trinh-arduino/index.html" rel="category tag">Lập trình arduino</a></span>
 				</div>
 				<h1 class="entry-title"><span>IOT-ESP8266: 02-Chương trình nháy led</span></h1>				<div class="entry-meta">
-					<span class="posted-on"><span class="screen-reader-text">Đăng vào</span><a href="index.html" rel="bookmark"><time class="entry-date published" datetime="2020-09-21T14:48:05+00:00">21 Tháng Chín, 2020</time><time class="updated" datetime="2020-09-21T15:10:16+00:00">21 Tháng Chín, 2020</time></a></span><span class="byline"><span class="author vcard"><img alt='' src='http://2.gravatar.com/avatar/?s=24&amp;d=mm&amp;r=g' srcset='http://0.gravatar.com/avatar/?s=48&#038;d=mm&#038;r=g 2x' class='avatar avatar-24 photo avatar-default' height='24' width='24' loading='lazy'/><span class="screen-reader-text">Tác giả</span><a class="url fn n" href="../../../../author/codervn/index.html">codervn</a></span></span>				</div>
+					<span class="posted-on"><span class="screen-reader-text">Đăng vào</span><a href="index.html" rel="bookmark"><time class="entry-date published" datetime="2020-09-21T14:48:05+00:00">21 Tháng Chín, 2020</time><time class="updated" datetime="2020-09-23T16:11:31+00:00">23 Tháng Chín, 2020</time></a></span><span class="byline"><span class="author vcard"><span class="screen-reader-text">Tác giả</span><a class="url fn n" href="../../../../author/codervn/index.html">codervn</a></span></span>				</div>
 			</div>
 					</div>
 		
@@ -148,7 +147,7 @@ img.emoji {
 		<main id="main" class="site-main" role="main">
 	
 		
-<article id="post-144" class="post-144 post type-post status-publish format-standard has-post-thumbnail hentry category-khong-phan-loai">
+<article id="post-144" class="post-144 post type-post status-publish format-standard has-post-thumbnail hentry category-lap-trinh-arduino tag-he-thong-iot tag-he-thong-iot-2 tag-lap-trinh-arduino tag-lap-trinh-arduino-2 tag-lap-trinh-esp8266 tag-lap-trinh-esp8266-2 tag-lap-trinh-iot tag-lap-trinh-node-mcu-2 tag-lap-trinh-nodemcu-2 tag-lap-trinh-nodemcu-3 tag-tim-hieu-esp8266 tag-tim-hieu-esp8266-2 tag-tim-hieu-nodemcu">
 		
 		
 	
@@ -194,7 +193,7 @@ img.emoji {
 
 
 
-<ul><li>#define LED D8: Thường để chương trình đọc dễ hiểu hơn thì chúng ta sẽ mặc định các ký tự dễ phân biệt(như LED, BUTTON) vào các chân IO</li><li>const int LED = 8: Cách này cũng gần tương tự như dùng #define nhưng cách này sẽ liên quan đến kiểu dữ liệu(int) mà ta chọn. Biến khi tạo ra sẽ không thể thay đổi được giá trị do ta đã định nghĩa là kiểu hằng số</li><li>pinMode(pin, mode): Định nghĩa 1 chân IO nào đó là output hoặc input, với pin là các chân IO(từ D0->Dx&#8230;)</li></ul>
+<ul><li>#define LED D8: Thường để chương trình đọc dễ hiểu hơn thì chúng ta sẽ mặc định các ký tự dễ phân biệt(như LED, BUTTON) vào các chân IO</li><li>const int LED = 8: Cách này cũng gần tương tự như dùng #define nhưng cách này sẽ liên quan đến kiểu dữ liệu(int) mà ta chọn. Biến khi tạo ra sẽ không thể thay đổi được giá trị do ta đã định nghĩa là kiểu hằng số</li><li>pinMode(pin, mode): Định nghĩa 1 chân IO nào đó là output hoặc input, với pin là các chân IO(từ D0-&gt;Dx&#8230;)</li></ul>
 
 
 
@@ -206,11 +205,11 @@ img.emoji {
 
 
 
-<p>Có thể vào File->Example để lấy project mẫu Blink hoặc có thể tự gõ code để nhớ hơn ^^ Sau đó nạp xuống dưới bo</p>
+<p>Có thể vào File-&gt;Example để lấy project mẫu Blink hoặc có thể tự gõ code để nhớ hơn ^^ Sau đó nạp xuống dưới bo</p>
 
 
 
-<p>Lưu ý vào Tools -> Chọn port đúng với port đăng gắn nodemcu</p>
+<p>Lưu ý vào Tools -&gt; Chọn port đúng với port đăng gắn nodemcu</p>
 
 
 
@@ -218,28 +217,15 @@ img.emoji {
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<span class="comments-link"><i class="material-icons">comment</i><a href="index.html#respond">Gửi bình luận<span class="screen-reader-text"> trong IOT-ESP8266: 02-Chương trình nháy led</span></a></span>	</footer><!-- .entry-footer -->
+		<span class="tags-links">Tag <a href="../../../../tag/he-thong-iot/index.html" rel="tag">hệ thống iot</a>, <a href="../../../../tag/he-thong-iot-2/index.html" rel="tag">he thong iot</a>, <a href="../../../../tag/lap-trinh-arduino/index.html" rel="tag">lap trinh arduino</a>, <a href="../../../../tag/lap-trinh-arduino-2/index.html" rel="tag">lập trình arduino</a>, <a href="../../../../tag/lap-trinh-esp8266/index.html" rel="tag">lập trình esp8266</a>, <a href="../../../../tag/lap-trinh-esp8266-2/index.html" rel="tag">lap trinh esp8266</a>, <a href="../../../../tag/lap-trinh-iot/index.html" rel="tag">lap trinh iot</a>, <a href="../../../../tag/lap-trinh-node-mcu-2/index.html" rel="tag">lập trình node mcu</a>, <a href="../../../../tag/lap-trinh-nodemcu-2/index.html" rel="tag">lap trinh nodemcu</a>, <a href="../../../../tag/lap-trinh-nodemcu-3/index.html" rel="tag">lập trình nodemcu</a>, <a href="../../../../tag/tim-hieu-esp8266/index.html" rel="tag">tìm hiểu esp8266</a>, <a href="../../../../tag/tim-hieu-esp8266-2/index.html" rel="tag">tim hieu esp8266</a>, <a href="../../../../tag/tim-hieu-nodemcu/index.html" rel="tag">tìm hiểu nodemcu</a></span>	</footer><!-- .entry-footer -->
 	
 </article><!-- #post-## -->
 
 
 	<nav class="navigation post-navigation" role="navigation" aria-label="Bài viết">
 		<h2 class="screen-reader-text">Điều hướng bài viết</h2>
-		<div class="nav-links"><div class="nav-previous"><a href="../iot-esp8266-01/index.html" rel="prev">IOT-ESP8266: 01-Tìm hiểu module esp8266 và khởi tạo công cụ</a></div></div>
+		<div class="nav-links"><div class="nav-previous"><a href="../iot-esp8266-01/index.html" rel="prev">IOT-ESP8266: 01-Tìm hiểu module esp8266 và khởi tạo công cụ</a></div><div class="nav-next"><a href="../../22/iot-esp8266-03-dieu-khien-do-sang-mo-led-voi-pwm/index.html" rel="next">IOT-ESP8266: 03-Điều khiển độ sáng/mờ led với PWM</a></div></div>
 	</nav>
-<div id="comments" class="comments-area">
-
-		<div id="respond" class="comment-respond">
-		<h3 id="reply-title" class="comment-reply-title">Trả lời <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Hủy</a></small></h3><form action="http://localhost/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Email của bạn sẽ không được hiển thị công khai.</span> Các trường bắt buộc được đánh dấu <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Bình luận</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Tên <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
-<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
-<p class="comment-form-url"><label for="url">Trang web</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
-<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Lưu tên của tôi, email, và trang web trong trình duyệt này cho lần bình luận kế tiếp của tôi.</label></p>
-<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Phản hồi" /> <input type='hidden' name='comment_post_ID' value='144' id='comment_post_ID' />
-<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
-</p></form>	</div><!-- #respond -->
-	
-</div><!-- #comments -->
-
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
@@ -267,11 +253,14 @@ img.emoji {
 </div><!-- #page -->
 
 <script type='text/javascript' src='../../../../wp-content/themes/type/js/skip-link-focus-fix4a7d.js?ver=20151215' id='type-skip-link-focus-fix-js'></script>
-<script type='text/javascript' src='../../../../wp-includes/js/comment-reply.mind03b.js?ver=5.5.1' id='comment-reply-js'></script>
 <script type='text/javascript' src='../../../../wp-content/themes/type/js/main01f4.js?ver=20171003' id='type-script-js'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/enlighter/cache/enlighterjs.min5b97.js?ver=0A0B0C' id='enlighterjs-js'></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
 <script type='text/javascript' src='../../../../wp-includes/js/wp-embed.mind03b.js?ver=5.5.1' id='wp-embed-js'></script>
 
 </body>
 
-<!-- Mirrored from localhost/2020/09/21/iot-esp8266-02-chuong-trinh-nhay-led/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 Sep 2020 16:41:50 GMT -->
+<!-- Mirrored from localhost/2020/09/21/iot-esp8266-02-chuong-trinh-nhay-led/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 23 Sep 2020 17:35:07 GMT -->
 </html>
