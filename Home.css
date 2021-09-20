@@ -271,7 +271,7 @@
 
   .u-section-2 .u-image-1 {
     height: 304px;
-    margin-top: -310px;
+    /*margin-top: -310px;*/
   }
 
   .u-section-2 .u-layout-cell-2 {
@@ -360,6 +360,12 @@
 
   .u-section-2 .u-container-layout-2 {
     padding-right: 50px;
+  }
+
+  .u-section-2 .u-image-1 {
+    height: 304px;
+    margin-top: -200px;
+    margin-bottom: 30px;
   }
 }
 
